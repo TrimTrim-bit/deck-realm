@@ -3,7 +3,6 @@ const BET_PANELS = {};
 function renderBetPanel(containerId, gameLabel = '') {
     const container = document.getElementById(containerId);
     if (!container) return null;
-
     const coins = state.coins;
     if (coins < 10) {
         container.innerHTML = `<div class="bet-panel">
@@ -17,7 +16,6 @@ function renderBetPanel(containerId, gameLabel = '') {
         };
         return null;
     }
-
     const initialPct = 25;
     const initialAmt = Math.max(10, Math.floor(coins * initialPct / 100));
     container.innerHTML = `
@@ -37,11 +35,9 @@ function renderBetPanel(containerId, gameLabel = '') {
                 <button class="btn primary-btn" data-pct="100">ALL IN</button>
             </div>
         </div>`;
-
     const slider = document.getElementById(`${containerId}-slider`);
     const pctLabel = document.getElementById(`${containerId}-pct`);
     const amtLabel = document.getElementById(`${containerId}-amt`);
-
     const update = () => {
         const pct = parseInt(slider.value);
         const amt = Math.max(1, Math.min(state.coins, Math.floor(state.coins * pct / 100)));
@@ -53,7 +49,6 @@ function renderBetPanel(containerId, gameLabel = '') {
         btn.onclick = () => { slider.value = btn.dataset.pct; update(); };
     });
     update();
-
     BET_PANELS[containerId] = {
         getAmount: () => {
             const pct = parseInt(slider.value);

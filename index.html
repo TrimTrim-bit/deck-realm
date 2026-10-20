@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Deck Realm - Ultimate Card Platform</title>
+    <title>Deck Realm - Ultimate Game Platform</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -11,6 +11,7 @@
         <header class="top-bar">
             <div class="logo">🂠 DECK REALM</div>
             <div class="user-stats">
+                <span id="title-display" class="profile-title">🎴 Card Novice</span>
                 <span id="level-display">⭐ Lv. 1</span>
                 <span id="xp-display">XP: 0/100</span>
                 <span id="coins-display">🪙 500 Coins</span>
@@ -18,9 +19,14 @@
             </div>
             <nav class="nav-links">
                 <button class="nav-btn active" data-tab="hub">Games Hub</button>
-                <button class="nav-btn" data-tab="boardgames">♟️ Board Games</button>
+                <button class="nav-btn" data-tab="boardgames">♟️ Board</button>
+                <button class="nav-btn" data-tab="wordgames">📝 Word</button>
+                <button class="nav-btn" data-tab="arcade">🕹️ Arcade</button>
                 <button class="nav-btn" data-tab="casino">🎰 Casino</button>
-                <button class="nav-btn" data-tab="shop">Card Shop</button>
+                <button class="nav-btn" data-tab="shop">🛍️ Boutique</button>
+                <button class="nav-btn" data-tab="jukebox">🎵 Jukebox</button>
+                <button class="nav-btn" data-tab="home">🏠 Home</button>
+                <button class="nav-btn" data-tab="pets">🐾 Pets</button>
                 <button class="nav-btn" data-tab="achievements">🏆 Badges</button>
             </nav>
         </header>
@@ -28,80 +34,153 @@
         <main id="main-content">
             <section id="tab-hub" class="tab-page active">
                 <div class="hero-banner">
-                    <h2>Welcome to the Ultimate Card Arena!</h2>
-                    <p>Play 10 card games, 4 board games, and 6 casino games — earn coins, complete quests, and unlock themed card skins!</p>
+                    <h2>Welcome to the Ultimate Game Arena!</h2>
+                    <p>50 games across card, board, word, arcade, and casino categories. Earn coins, customize your deck, adopt pets, and unlock music!</p>
                 </div>
                 <div class="game-grid">
-                    <div class="game-card"><div class="badge original">Original</div><h3>⚡ Flux Shift</h3><p>Place 6 cards across 3 lanes without busting.</p>
-                        <div class="card-actions"><button class="btn play-btn" onclick="AudioFX.playClick(); showGameSetup('flux-shift')">Play</button><button class="btn tutorial-btn" onclick="AudioFX.playClick(); startAnimatedTutorial('flux-shift')">Tutorial 🎬</button></div></div>
-                    <div class="game-card"><div class="badge classic">Classic</div><h3>🎨 Color Match (UNO)</h3><p>Full 108-card UNO with actions and wilds.</p>
-                        <div class="card-actions"><button class="btn play-btn" onclick="AudioFX.playClick(); showGameSetup('color-match')">Play</button><button class="btn tutorial-btn" onclick="AudioFX.playClick(); startAnimatedTutorial('color-match')">Tutorial 🎬</button></div></div>
-                    <div class="game-card"><div class="badge classic">Puzzle</div><h3>🏛️ Pyramid Solitaire</h3><p>Clear a 28-card pyramid by pairing to 13.</p>
-                        <div class="card-actions"><button class="btn play-btn" onclick="AudioFX.playClick(); showGameSetup('pyramid-solitaire')">Play</button><button class="btn tutorial-btn" onclick="AudioFX.playClick(); startAnimatedTutorial('pyramid-solitaire')">Tutorial 🎬</button></div></div>
-                    <div class="game-card"><div class="badge original">Original</div><h3>🌌 Quantum Swap</h3><p>Stabilize the portal with parity-matched draws.</p>
-                        <div class="card-actions"><button class="btn play-btn" onclick="AudioFX.playClick(); showGameSetup('quantum-swap')">Play</button><button class="btn tutorial-btn" onclick="AudioFX.playClick(); startAnimatedTutorial('quantum-swap')">Tutorial 🎬</button></div></div>
-                    <div class="game-card"><div class="badge classic">Classic</div><h3>🗑️ Trash</h3><p>Fill 10 numbered slots with chain-swaps.</p>
-                        <div class="card-actions"><button class="btn play-btn" onclick="AudioFX.playClick(); showGameSetup('trash')">Play</button><button class="btn tutorial-btn" onclick="AudioFX.playClick(); startAnimatedTutorial('trash')">Tutorial 🎬</button></div></div>
-                    <div class="game-card"><div class="badge classic">Classic</div><h3>⚔️ Card War</h3><p>8 battles — ties trigger automatic War!</p>
-                        <div class="card-actions"><button class="btn play-btn" onclick="AudioFX.playClick(); showGameSetup('war')">Play</button><button class="btn tutorial-btn" onclick="AudioFX.playClick(); startAnimatedTutorial('war')">Tutorial 🎬</button></div></div>
-                    <div class="game-card"><div class="badge classic">Classic</div><h3>🐟 Go Fish</h3><p>Collect 4-of-a-kind books against an AI.</p>
-                        <div class="card-actions"><button class="btn play-btn" onclick="AudioFX.playClick(); showGameSetup('go-fish')">Play</button><button class="btn tutorial-btn" onclick="AudioFX.playClick(); startAnimatedTutorial('go-fish')">Tutorial 🎬</button></div></div>
-                    <div class="game-card"><div class="badge original">Original</div><h3>🔥 Chaos High-Low</h3><p>Guess 5 cards higher or lower for streaks.</p>
-                        <div class="card-actions"><button class="btn play-btn" onclick="AudioFX.playClick(); showGameSetup('high-low')">Play</button><button class="btn tutorial-btn" onclick="AudioFX.playClick(); startAnimatedTutorial('high-low')">Tutorial 🎬</button></div></div>
-                    <div class="game-card"><div class="badge classic">Puzzle</div><h3>🀄 Mahjong Solitaire</h3><p>Match free tiles to clear the 32-tile board.</p>
-                        <div class="card-actions"><button class="btn play-btn" onclick="AudioFX.playClick(); showGameSetup('mahjong')">Play</button><button class="btn tutorial-btn" onclick="AudioFX.playClick(); startAnimatedTutorial('mahjong')">Tutorial 🎬</button></div></div>
-                    <div class="game-card"><div class="badge casino">Casino</div><h3>🃏 Texas Hold'em</h3><p>Real poker with AI opponent and betting streets.</p>
-                        <div class="card-actions"><button class="btn play-btn" onclick="AudioFX.playClick(); showGameSetup('poker')">Play</button><button class="btn tutorial-btn" onclick="AudioFX.playClick(); startAnimatedTutorial('poker')">Tutorial 🎬</button></div></div>
+                    <div class="game-card"><div class="badge original">Original</div><h3>⚡ Flux Shift</h3><p>Place cards in 3 lanes without busting.</p><div class="card-actions"><button class="btn play-btn" onclick="AudioFX.playClick(); showGameSetup('flux-shift')">Play</button><button class="btn tutorial-btn" onclick="AudioFX.playClick(); startAnimatedTutorial('flux-shift')">Tutorial 🎬</button></div></div>
+                    <div class="game-card"><div class="badge classic">Classic</div><h3>🎨 Color Match (UNO)</h3><p>Full 108-card UNO with action cards.</p><div class="card-actions"><button class="btn play-btn" onclick="AudioFX.playClick(); showGameSetup('color-match')">Play</button><button class="btn tutorial-btn" onclick="AudioFX.playClick(); startAnimatedTutorial('color-match')">Tutorial 🎬</button></div></div>
+                    <div class="game-card"><div class="badge classic">Puzzle</div><h3>🏛️ Pyramid Solitaire</h3><p>Clear 28 cards by pairing to 13.</p><div class="card-actions"><button class="btn play-btn" onclick="AudioFX.playClick(); showGameSetup('pyramid-solitaire')">Play</button><button class="btn tutorial-btn" onclick="AudioFX.playClick(); startAnimatedTutorial('pyramid-solitaire')">Tutorial 🎬</button></div></div>
+                    <div class="game-card"><div class="badge original">Original</div><h3>🌌 Quantum Swap</h3><p>Stabilize the portal with parity draws.</p><div class="card-actions"><button class="btn play-btn" onclick="AudioFX.playClick(); showGameSetup('quantum-swap')">Play</button><button class="btn tutorial-btn" onclick="AudioFX.playClick(); startAnimatedTutorial('quantum-swap')">Tutorial 🎬</button></div></div>
+                    <div class="game-card"><div class="badge classic">Classic</div><h3>🗑️ Trash</h3><p>Fill 10 numbered slots with chain-swaps.</p><div class="card-actions"><button class="btn play-btn" onclick="AudioFX.playClick(); showGameSetup('trash')">Play</button><button class="btn tutorial-btn" onclick="AudioFX.playClick(); startAnimatedTutorial('trash')">Tutorial 🎬</button></div></div>
+                    <div class="game-card"><div class="badge classic">Classic</div><h3>⚔️ Card War</h3><p>8 battles — ties trigger automatic War!</p><div class="card-actions"><button class="btn play-btn" onclick="AudioFX.playClick(); showGameSetup('war')">Play</button><button class="btn tutorial-btn" onclick="AudioFX.playClick(); startAnimatedTutorial('war')">Tutorial 🎬</button></div></div>
+                    <div class="game-card"><div class="badge classic">Classic</div><h3>🐟 Go Fish</h3><p>Collect 4-of-a-kind books.</p><div class="card-actions"><button class="btn play-btn" onclick="AudioFX.playClick(); showGameSetup('go-fish')">Play</button><button class="btn tutorial-btn" onclick="AudioFX.playClick(); startAnimatedTutorial('go-fish')">Tutorial 🎬</button></div></div>
+                    <div class="game-card"><div class="badge original">Original</div><h3>🔥 Chaos High-Low</h3><p>Guess 5 cards higher or lower.</p><div class="card-actions"><button class="btn play-btn" onclick="AudioFX.playClick(); showGameSetup('high-low')">Play</button><button class="btn tutorial-btn" onclick="AudioFX.playClick(); startAnimatedTutorial('high-low')">Tutorial 🎬</button></div></div>
+                    <div class="game-card"><div class="badge classic">Puzzle</div><h3>🀄 Mahjong Solitaire</h3><p>Match free tiles on a 32-tile board.</p><div class="card-actions"><button class="btn play-btn" onclick="AudioFX.playClick(); showGameSetup('mahjong')">Play</button><button class="btn tutorial-btn" onclick="AudioFX.playClick(); startAnimatedTutorial('mahjong')">Tutorial 🎬</button></div></div>
+                    <div class="game-card"><div class="badge casino">Casino</div><h3>🃏 Texas Hold'em</h3><p>Real poker with AI betting.</p><div class="card-actions"><button class="btn play-btn" onclick="AudioFX.playClick(); showGameSetup('poker')">Play</button><button class="btn tutorial-btn" onclick="AudioFX.playClick(); startAnimatedTutorial('poker')">Tutorial 🎬</button></div></div>
+                    <div class="game-card"><div class="badge original">Modern</div><h3>🃏 Memory Match</h3><p>Flip cards and match 8 pairs.</p><div class="card-actions"><button class="btn play-btn" onclick="AudioFX.playClick(); showGameSetup('memory-match')">Play</button><button class="btn tutorial-btn" onclick="AudioFX.playClick(); startAnimatedTutorial('memory-match')">Tutorial 🎬</button></div></div>
+                    <div class="game-card"><div class="badge classic">Card</div><h3>🖐️ Snap!</h3><p>React fast when two cards match.</p><div class="card-actions"><button class="btn play-btn" onclick="AudioFX.playClick(); showGameSetup('snap')">Play</button><button class="btn tutorial-btn" onclick="AudioFX.playClick(); startAnimatedTutorial('snap')">Tutorial 🎬</button></div></div>
+                    <div class="game-card"><div class="badge original">Modern</div><h3>💣 Bomb Cat</h3><p>Draw cards, dodge bombs, survive 25 turns.</p><div class="card-actions"><button class="btn play-btn" onclick="AudioFX.playClick(); showGameSetup('bomb-cat')">Play</button><button class="btn tutorial-btn" onclick="AudioFX.playClick(); startAnimatedTutorial('bomb-cat')">Tutorial 🎬</button></div></div>
+                    <div class="game-card"><div class="badge classic">Classic</div><h3>🃏 Klondike</h3><p>The classic solitaire! Build 4 foundations.</p><div class="card-actions"><button class="btn play-btn" onclick="AudioFX.playClick(); showGameSetup('klondike')">Play</button><button class="btn tutorial-btn" onclick="AudioFX.playClick(); startAnimatedTutorial('klondike')">Tutorial 🎬</button></div></div>
+                    <div class="game-card"><div class="badge classic">Classic</div><h3>💌 Old Maid</h3><p>Match pairs, avoid the unpaired card.</p><div class="card-actions"><button class="btn play-btn" onclick="AudioFX.playClick(); showGameSetup('old-maid')">Play</button><button class="btn tutorial-btn" onclick="AudioFX.playClick(); startAnimatedTutorial('old-maid')">Tutorial 🎬</button></div></div>
+                    <div class="game-card"><div class="badge original">Arcade</div><h3>🎯 Darts</h3><p>Click to throw. Hit the bullseye!</p><div class="card-actions"><button class="btn play-btn" onclick="AudioFX.playClick(); showGameSetup('darts')">Play</button><button class="btn tutorial-btn" onclick="AudioFX.playClick(); startAnimatedTutorial('darts')">Tutorial 🎬</button></div></div>
+                    <div class="game-card"><div class="badge original">Arcade</div><h3>🎳 Bowling</h3><p>3 frames, 10 pins. Aim and roll!</p><div class="card-actions"><button class="btn play-btn" onclick="AudioFX.playClick(); showGameSetup('bowling')">Play</button><button class="btn tutorial-btn" onclick="AudioFX.playClick(); startAnimatedTutorial('bowling')">Tutorial 🎬</button></div></div>
+                    <div class="game-card"><div class="badge classic">Card</div><h3>🃏 Gin Rummy</h3><p>Collect melds, knock to win!</p><div class="card-actions"><button class="btn play-btn" onclick="AudioFX.playClick(); showGameSetup('gin-rummy')">Play</button><button class="btn tutorial-btn" onclick="AudioFX.playClick(); startAnimatedTutorial('gin-rummy')">Tutorial 🎬</button></div></div>
+                    <div class="game-card"><div class="badge original">Arcade</div><h3>⛳ Mini Golf</h3><p>Drag to aim and putt. Get in the hole!</p><div class="card-actions"><button class="btn play-btn" onclick="AudioFX.playClick(); showGameSetup('mini-golf')">Play</button><button class="btn tutorial-btn" onclick="AudioFX.playClick(); startAnimatedTutorial('mini-golf')">Tutorial 🎬</button></div></div>
+                    <div class="game-card"><div class="badge classic">Classic</div><h3>🃏 FreeCell</h3><p>Every card visible. Solve the classic!</p><div class="card-actions"><button class="btn play-btn" onclick="AudioFX.playClick(); showGameSetup('freecell')">Play</button><button class="btn tutorial-btn" onclick="AudioFX.playClick(); startAnimatedTutorial('freecell')">Tutorial 🎬</button></div></div>
+                    <div class="game-card"><div class="badge classic">Classic</div><h3>♥️ Hearts</h3><p>Trick-taking vs 3 AI. Avoid hearts and Q♠!</p><div class="card-actions"><button class="btn play-btn" onclick="AudioFX.playClick(); showGameSetup('hearts')">Play</button><button class="btn tutorial-btn" onclick="AudioFX.playClick(); startAnimatedTutorial('hearts')">Tutorial 🎬</button></div></div>
+                    <div class="game-card"><div class="badge classic">Classic</div><h3>🃏 Cribbage</h3><p>Discard, count your hand, first to 61 wins!</p><div class="card-actions"><button class="btn play-btn" onclick="AudioFX.playClick(); showGameSetup('cribbage')">Play</button><button class="btn tutorial-btn" onclick="AudioFX.playClick(); startAnimatedTutorial('cribbage')">Tutorial 🎬</button></div></div>
                 </div>
             </section>
 
             <section id="tab-boardgames" class="tab-page">
                 <div class="hero-banner" style="background:linear-gradient(135deg,#1e1b4b,#0c4a6e); border-color:#0ea5e9;">
                     <h2>♟️ The Board Game Room</h2>
-                    <p>Classic strategy games for every mood. Play chess against a real AI opponent, pull Jenga blocks, or solve a Rubik's cube — all free, all skill-based.</p>
+                    <p>Classic strategy games including chess, checkers, and Backgammon.</p>
                 </div>
                 <div class="game-grid">
-                    <div class="game-card"><div class="badge boardgame">Board</div><h3>♟️ Chess</h3><p>Full rules with check/checkmate. Beat the AI in classic chess.</p>
-                        <div class="card-actions"><button class="btn play-btn" onclick="AudioFX.playClick(); showGameSetup('chess')">Play</button><button class="btn tutorial-btn" onclick="AudioFX.playClick(); startAnimatedTutorial('chess')">Tutorial 🎬</button></div></div>
-                    <div class="game-card"><div class="badge boardgame">Board</div><h3>🔴 Checkers</h3><p>Forced captures, king promotions, and an AI opponent.</p>
-                        <div class="card-actions"><button class="btn play-btn" onclick="AudioFX.playClick(); showGameSetup('checkers')">Play</button><button class="btn tutorial-btn" onclick="AudioFX.playClick(); startAnimatedTutorial('checkers')">Tutorial 🎬</button></div></div>
-                    <div class="game-card"><div class="badge boardgame">Board</div><h3>🧱 Jenga</h3><p>Pull blocks from the tower. Push your luck before it collapses!</p>
-                        <div class="card-actions"><button class="btn play-btn" onclick="AudioFX.playClick(); showGameSetup('jenga')">Play</button><button class="btn tutorial-btn" onclick="AudioFX.playClick(); startAnimatedTutorial('jenga')">Tutorial 🎬</button></div></div>
-                    <div class="game-card"><div class="badge boardgame">Board</div><h3>🎨 Rubik's Cube</h3><p>Scramble the cube and rotate faces to solve it. Real 3×3 mechanics!</p>
-                        <div class="card-actions"><button class="btn play-btn" onclick="AudioFX.playClick(); showGameSetup('rubiks')">Play</button><button class="btn tutorial-btn" onclick="AudioFX.playClick(); startAnimatedTutorial('rubiks')">Tutorial 🎬</button></div></div>
+                    <div class="game-card"><div class="badge boardgame">Board</div><h3>♟️ Chess</h3><p>Full rules with check/checkmate AI.</p><div class="card-actions"><button class="btn play-btn" onclick="AudioFX.playClick(); showGameSetup('chess')">Play</button><button class="btn tutorial-btn" onclick="AudioFX.playClick(); startAnimatedTutorial('chess')">Tutorial 🎬</button></div></div>
+                    <div class="game-card"><div class="badge boardgame">Board</div><h3>🔴 Checkers</h3><p>Forced captures, multi-jumps, smart AI.</p><div class="card-actions"><button class="btn play-btn" onclick="AudioFX.playClick(); showGameSetup('checkers')">Play</button><button class="btn tutorial-btn" onclick="AudioFX.playClick(); startAnimatedTutorial('checkers')">Tutorial 🎬</button></div></div>
+                    <div class="game-card"><div class="badge boardgame">Board</div><h3>🧱 Jenga</h3><p>Wobble meter, risk indicators, collapse!</p><div class="card-actions"><button class="btn play-btn" onclick="AudioFX.playClick(); showGameSetup('jenga')">Play</button><button class="btn tutorial-btn" onclick="AudioFX.playClick(); startAnimatedTutorial('jenga')">Tutorial 🎬</button></div></div>
+                    <div class="game-card"><div class="badge boardgame">Board</div><h3>🎨 Rubik's Cube</h3><p>3-move scramble, 12-move budget, hints!</p><div class="card-actions"><button class="btn play-btn" onclick="AudioFX.playClick(); showGameSetup('rubiks')">Play</button><button class="btn tutorial-btn" onclick="AudioFX.playClick(); startAnimatedTutorial('rubiks')">Tutorial 🎬</button></div></div>
+                    <div class="game-card"><div class="badge boardgame">Board</div><h3>🔴 Connect Four</h3><p>Drop discs, get 4 in a row.</p><div class="card-actions"><button class="btn play-btn" onclick="AudioFX.playClick(); showGameSetup('connect-four')">Play</button><button class="btn tutorial-btn" onclick="AudioFX.playClick(); startAnimatedTutorial('connect-four')">Tutorial 🎬</button></div></div>
+                    <div class="game-card"><div class="badge boardgame">Board</div><h3>⭕ Tic-Tac-Toe</h3><p>Fast 3-in-a-row classic.</p><div class="card-actions"><button class="btn play-btn" onclick="AudioFX.playClick(); showGameSetup('tic-tac-toe')">Play</button><button class="btn tutorial-btn" onclick="AudioFX.playClick(); startAnimatedTutorial('tic-tac-toe')">Tutorial 🎬</button></div></div>
+                    <div class="game-card"><div class="badge boardgame">Board</div><h3>🚢 Battleship</h3><p>Sink the enemy fleet on 8×8 grid.</p><div class="card-actions"><button class="btn play-btn" onclick="AudioFX.playClick(); showGameSetup('battleship')">Play</button><button class="btn tutorial-btn" onclick="AudioFX.playClick(); startAnimatedTutorial('battleship')">Tutorial 🎬</button></div></div>
+                    <div class="game-card"><div class="badge boardgame">Dice</div><h3>🎲 Yahtzee</h3><p>Roll 5 dice, score 13 categories!</p><div class="card-actions"><button class="btn play-btn" onclick="AudioFX.playClick(); showGameSetup('yahtzee')">Play</button><button class="btn tutorial-btn" onclick="AudioFX.playClick(); startAnimatedTutorial('yahtzee')">Tutorial 🎬</button></div></div>
+                    <div class="game-card"><div class="badge boardgame">Puzzle</div><h3>🔮 Mastermind</h3><p>Crack the 4-color secret code.</p><div class="card-actions"><button class="btn play-btn" onclick="AudioFX.playClick(); showGameSetup('mastermind')">Play</button><button class="btn tutorial-btn" onclick="AudioFX.playClick(); startAnimatedTutorial('mastermind')">Tutorial 🎬</button></div></div>
+                    <div class="game-card"><div class="badge boardgame">Board</div><h3>⚫ Othello</h3><p>Sandwich and flip enemy pieces.</p><div class="card-actions"><button class="btn play-btn" onclick="AudioFX.playClick(); showGameSetup('othello')">Play</button><button class="btn tutorial-btn" onclick="AudioFX.playClick(); startAnimatedTutorial('othello')">Tutorial 🎬</button></div></div>
+                    <div class="game-card"><div class="badge boardgame">Board</div><h3>🎲 Backgammon</h3><p>Race checkers, bear off to win!</p><div class="card-actions"><button class="btn play-btn" onclick="AudioFX.playClick(); showGameSetup('backgammon')">Play</button><button class="btn tutorial-btn" onclick="AudioFX.playClick(); startAnimatedTutorial('backgammon')">Tutorial 🎬</button></div></div>
+                </div>
+            </section>
+
+            <section id="tab-wordgames" class="tab-page">
+                <div class="hero-banner" style="background:linear-gradient(135deg,#312e81,#7c2d12); border-color:#f59e0b;">
+                    <h2>📝 Word Games</h2>
+                    <p>Wordle, Waffle, Scrabble, Hangman, and Boggle — all with a junior dictionary.</p>
+                </div>
+                <div class="game-grid">
+                    <div class="game-card"><div class="badge wordgame">Word</div><h3>📝 Wordle</h3><p>Guess the 5-letter word in 6 tries.</p><div class="card-actions"><button class="btn play-btn" onclick="AudioFX.playClick(); showGameSetup('wordle')">Play</button><button class="btn tutorial-btn" onclick="AudioFX.playClick(); startAnimatedTutorial('wordle')">Tutorial 🎬</button></div></div>
+                    <div class="game-card"><div class="badge wordgame">Word</div><h3>🧇 Waffle</h3><p>Swap letters to solve 6 words.</p><div class="card-actions"><button class="btn play-btn" onclick="AudioFX.playClick(); showGameSetup('waffle')">Play</button><button class="btn tutorial-btn" onclick="AudioFX.playClick(); startAnimatedTutorial('waffle')">Tutorial 🎬</button></div></div>
+                    <div class="game-card"><div class="badge wordgame">Word</div><h3>🔤 Scrabble</h3><p>Place words, score, beat the AI.</p><div class="card-actions"><button class="btn play-btn" onclick="AudioFX.playClick(); showGameSetup('scrabble')">Play</button><button class="btn tutorial-btn" onclick="AudioFX.playClick(); startAnimatedTutorial('scrabble')">Tutorial 🎬</button></div></div>
+                    <div class="game-card"><div class="badge wordgame">Word</div><h3>🎯 Hangman</h3><p>Guess the hidden word letter by letter.</p><div class="card-actions"><button class="btn play-btn" onclick="AudioFX.playClick(); showGameSetup('hangman')">Play</button><button class="btn tutorial-btn" onclick="AudioFX.playClick(); startAnimatedTutorial('hangman')">Tutorial 🎬</button></div></div>
+                    <div class="game-card"><div class="badge wordgame">Word</div><h3>🎰 Boggle</h3><p>Trace adjacent letters to find words.</p><div class="card-actions"><button class="btn play-btn" onclick="AudioFX.playClick(); showGameSetup('boggle')">Play</button><button class="btn tutorial-btn" onclick="AudioFX.playClick(); startAnimatedTutorial('boggle')">Tutorial 🎬</button></div></div>
+                </div>
+            </section>
+
+            <section id="tab-arcade" class="tab-page">
+                <div class="hero-banner" style="background:linear-gradient(135deg,#1c1917,#7c2d12); border-color:#f97316;">
+                    <h2>🕹️ Arcade Games</h2>
+                    <p>Classic arcade action — Snake, Tetris, Asteroids, Frogger, Dig Dug, and Minesweeper!</p>
+                </div>
+                <div class="game-grid">
+                    <div class="game-card"><div class="badge original">Arcade</div><h3>🐍 Snake</h3><p>Eat apples, avoid walls and your tail.</p><div class="card-actions"><button class="btn play-btn" onclick="AudioFX.playClick(); showGameSetup('snake')">Play</button><button class="btn tutorial-btn" onclick="AudioFX.playClick(); startAnimatedTutorial('snake')">Tutorial 🎬</button></div></div>
+                    <div class="game-card"><div class="badge original">Arcade</div><h3>🧱 Tetris</h3><p>Stack falling blocks, clear lines!</p><div class="card-actions"><button class="btn play-btn" onclick="AudioFX.playClick(); showGameSetup('tetris')">Play</button><button class="btn tutorial-btn" onclick="AudioFX.playClick(); startAnimatedTutorial('tetris')">Tutorial 🎬</button></div></div>
+                    <div class="game-card"><div class="badge original">Arcade</div><h3>🚀 Asteroids</h3><p>Blast floating rocks in space.</p><div class="card-actions"><button class="btn play-btn" onclick="AudioFX.playClick(); showGameSetup('asteroids')">Play</button><button class="btn tutorial-btn" onclick="AudioFX.playClick(); startAnimatedTutorial('asteroids')">Tutorial 🎬</button></div></div>
+                    <div class="game-card"><div class="badge original">Arcade</div><h3>🐸 Frogger</h3><p>Cross the road and river!</p><div class="card-actions"><button class="btn play-btn" onclick="AudioFX.playClick(); showGameSetup('frogger')">Play</button><button class="btn tutorial-btn" onclick="AudioFX.playClick(); startAnimatedTutorial('frogger')">Tutorial 🎬</button></div></div>
+                    <div class="game-card"><div class="badge original">Arcade</div><h3>⛏️ Dig Dug</h3><p>Dig tunnels, hunt enemies.</p><div class="card-actions"><button class="btn play-btn" onclick="AudioFX.playClick(); showGameSetup('dig-dug')">Play</button><button class="btn tutorial-btn" onclick="AudioFX.playClick(); startAnimatedTutorial('dig-dug')">Tutorial 🎬</button></div></div>
+                    <div class="game-card"><div class="badge classic">Puzzle</div><h3>💣 Minesweeper</h3><p>Classic logic puzzle. Flag the mines.</p><div class="card-actions"><button class="btn play-btn" onclick="AudioFX.playClick(); showGameSetup('minesweeper')">Play</button><button class="btn tutorial-btn" onclick="AudioFX.playClick(); startAnimatedTutorial('minesweeper')">Tutorial 🎬</button></div></div>
                 </div>
             </section>
 
             <section id="tab-casino" class="tab-page">
                 <div class="hero-banner" style="background:linear-gradient(135deg,#0c1e2e,#1a0b2e); border-color:#7c3aed;">
                     <h2>🎰 The Casino Wing</h2>
-                    <p>Bet your 🪙 coins on classic casino games! <b>All coins are play money — no real currency involved.</b> Use the % slider to size your bet.</p>
+                    <p>All coins are play money — no real currency involved. Use the % slider to size your bet.</p>
                 </div>
                 <div class="game-grid">
-                    <div class="game-card"><div class="badge casino">Casino</div><h3>♠️ Vegas Blackjack</h3><p>Hit or stand. Blackjack pays 3:2. Dealer stands on all 17s.</p>
-                        <div class="card-actions"><button class="btn play-btn" onclick="AudioFX.playClick(); showGameSetup('blackjack')">Play</button><button class="btn tutorial-btn" onclick="AudioFX.playClick(); startAnimatedTutorial('blackjack')">Tutorial 🎬</button></div></div>
-                    <div class="game-card"><div class="badge casino">Casino</div><h3>🎰 Baccarat</h3><p>Bet Player, Banker, or Tie. Closest to 9 wins.</p>
-                        <div class="card-actions"><button class="btn play-btn" onclick="AudioFX.playClick(); showGameSetup('baccarat')">Play</button><button class="btn tutorial-btn" onclick="AudioFX.playClick(); startAnimatedTutorial('baccarat')">Tutorial 🎬</button></div></div>
-                    <div class="game-card"><div class="badge casino">Casino</div><h3>🃏 Three Card Poker</h3><p>Ante, play or fold. Real 3-card hand rankings.</p>
-                        <div class="card-actions"><button class="btn play-btn" onclick="AudioFX.playClick(); showGameSetup('three-card-poker')">Play</button><button class="btn tutorial-btn" onclick="AudioFX.playClick(); startAnimatedTutorial('three-card-poker')">Tutorial 🎬</button></div></div>
-                    <div class="game-card"><div class="badge casino">Casino</div><h3>🎡 Roulette</h3><p>European single-zero wheel. 1:1 to 35:1 bets.</p>
-                        <div class="card-actions"><button class="btn play-btn" onclick="AudioFX.playClick(); showGameSetup('roulette')">Play</button><button class="btn tutorial-btn" onclick="AudioFX.playClick(); startAnimatedTutorial('roulette')">Tutorial 🎬</button></div></div>
-                    <div class="game-card"><div class="badge casino">Casino</div><h3>🎲 Craps</h3><p>Roll the dice! 7 or 11 wins on come-out. Point phase: match your point, avoid 7.</p>
-                        <div class="card-actions"><button class="btn play-btn" onclick="AudioFX.playClick(); showGameSetup('craps')">Play</button><button class="btn tutorial-btn" onclick="AudioFX.playClick(); startAnimatedTutorial('craps')">Tutorial 🎬</button></div></div>
-                    <div class="game-card"><div class="badge casino">Casino</div><h3>🎲 Plinko</h3><p>Drop a ball into a physics-simulated peg board. Up to 10× payout!</p>
-                        <div class="card-actions"><button class="btn play-btn" onclick="AudioFX.playClick(); showGameSetup('plinko')">Play</button><button class="btn tutorial-btn" onclick="AudioFX.playClick(); startAnimatedTutorial('plinko')">Tutorial 🎬</button></div></div>
+                    <div class="game-card"><div class="badge casino">Casino</div><h3>♠️ Vegas Blackjack</h3><p>Hit or stand. Blackjack pays 3:2.</p><div class="card-actions"><button class="btn play-btn" onclick="AudioFX.playClick(); showGameSetup('blackjack')">Play</button><button class="btn tutorial-btn" onclick="AudioFX.playClick(); startAnimatedTutorial('blackjack')">Tutorial 🎬</button></div></div>
+                    <div class="game-card"><div class="badge casino">Casino</div><h3>🎰 Baccarat</h3><p>Bet Player, Banker, or Tie.</p><div class="card-actions"><button class="btn play-btn" onclick="AudioFX.playClick(); showGameSetup('baccarat')">Play</button><button class="btn tutorial-btn" onclick="AudioFX.playClick(); startAnimatedTutorial('baccarat')">Tutorial 🎬</button></div></div>
+                    <div class="game-card"><div class="badge casino">Casino</div><h3>🃏 Three Card Poker</h3><p>Ante, play or fold.</p><div class="card-actions"><button class="btn play-btn" onclick="AudioFX.playClick(); showGameSetup('three-card-poker')">Play</button><button class="btn tutorial-btn" onclick="AudioFX.playClick(); startAnimatedTutorial('three-card-poker')">Tutorial 🎬</button></div></div>
+                    <div class="game-card"><div class="badge casino">Casino</div><h3>🎡 Roulette</h3><p>European single-zero wheel.</p><div class="card-actions"><button class="btn play-btn" onclick="AudioFX.playClick(); showGameSetup('roulette')">Play</button><button class="btn tutorial-btn" onclick="AudioFX.playClick(); startAnimatedTutorial('roulette')">Tutorial 🎬</button></div></div>
+                    <div class="game-card"><div class="badge casino">Casino</div><h3>🎲 Craps</h3><p>Roll the dice — 7 or 11 wins!</p><div class="card-actions"><button class="btn play-btn" onclick="AudioFX.playClick(); showGameSetup('craps')">Play</button><button class="btn tutorial-btn" onclick="AudioFX.playClick(); startAnimatedTutorial('craps')">Tutorial 🎬</button></div></div>
+                    <div class="game-card"><div class="badge casino">Casino</div><h3>🎲 Plinko</h3><p>Physics peg board up to 10×.</p><div class="card-actions"><button class="btn play-btn" onclick="AudioFX.playClick(); showGameSetup('plinko')">Play</button><button class="btn tutorial-btn" onclick="AudioFX.playClick(); startAnimatedTutorial('plinko')">Tutorial 🎬</button></div></div>
                 </div>
             </section>
 
             <section id="tab-shop" class="tab-page">
-                <h2>🏬 The Deck Boutique</h2>
-                <p>Customize your card cosmetics! Unlocked themes apply instantly across all games.</p>
+                <div class="hero-banner" style="background:linear-gradient(135deg,#4a044e,#1e1b4b); border-color:#a855f7;">
+                    <h2>🛍️ The Deck Boutique</h2>
+                    <p>Spend coins on cosmetics and boosters!</p>
+                </div>
+                <div class="shop-categories">
+                    <button class="cat-btn active" data-cat="faces">🎨 Card Faces</button>
+                    <button class="cat-btn" data-cat="backs">🎴 Card Backs</button>
+                    <button class="cat-btn" data-cat="themes">🌈 Themes</button>
+                    <button class="cat-btn" data-cat="titles">👑 Titles</button>
+                    <button class="cat-btn" data-cat="boosters">⚡ Boosters</button>
+                </div>
                 <div class="shop-grid" id="shop-items-container"></div>
+                <div style="margin-top:40px; padding-top:20px; border-top:1px solid var(--border-color); text-align:center;">
+                    <button class="btn tutorial-btn" onclick="resetSave()">🗑️ Reset All Progress</button>
+                </div>
+            </section>
+
+            <section id="tab-jukebox" class="tab-page">
+                <div class="hero-banner" style="background:linear-gradient(135deg,#0f172a,#4a044e); border-color:#f472b6;">
+                    <h2>🎵 The Jukebox</h2>
+                    <p>Buy tracks to play in the background while you browse.</p>
+                </div>
+                <div class="now-playing-box">
+                    <div id="now-playing">🔇 Nothing playing</div>
+                    <div style="margin-top:12px;">
+                        <label style="color:var(--text-muted); font-size:0.9rem;">
+                            🔈 Volume:
+                            <input type="range" id="music-volume" min="0" max="100" value="15" style="vertical-align:middle; width:180px; margin-left:8px;">
+                        </label>
+                    </div>
+                </div>
+                <div class="shop-grid" id="jukebox-grid"></div>
+            </section>
+
+            <section id="tab-home" class="tab-page">
+                <div class="hero-banner" style="background:linear-gradient(135deg,#4a3728,#1e1b4b); border-color:#d97706;">
+                    <h2>🏠 Your Home</h2>
+                    <p>Buy rooms and furniture to earn passive coin/XP bonuses that stack with your pet!</p>
+                </div>
+                <div id="house-container"></div>
+            </section>
+
+            <section id="tab-pets" class="tab-page">
+                <div class="hero-banner" style="background:linear-gradient(135deg,#4a044e,#0c4a6e); border-color:#a855f7;">
+                    <h2>🐾 Your Companions</h2>
+                    <p>Adopt a pet to boost earnings. Feed daily for coins, and click 🐾 in games for strategic tips!</p>
+                </div>
+                <div id="pets-container"></div>
             </section>
 
             <section id="tab-achievements" class="tab-page">
                 <h2>🏆 Hall of Trophies</h2>
-                <p>Complete milestones while playing games to earn bonus coins and XP!</p>
+                <p>Complete milestones to earn bonus coins!</p>
                 <div class="shop-grid" id="achievements-container"></div>
             </section>
 
@@ -110,7 +189,8 @@
                     <button class="btn back-btn" onclick="AudioFX.playClick(); closeGameStage()">← Back to Hub</button>
                     <h2 id="active-game-title">Game Title</h2>
                     <div style="display:flex; gap:8px;">
-                        <button class="btn tutorial-btn" onclick="restartCurrentGame()" title="Restart game">🔄</button>
+                        <button class="btn tutorial-btn" onclick="restartCurrentGame()" title="Restart">🔄</button>
+                        <button class="btn tutorial-btn" onclick="showPetTip()" title="Pet tip">🐾</button>
                         <button class="btn tutorial-btn" onclick="AudioFX.playClick()" id="in-game-tutorial-btn">Tutorial 🎬</button>
                     </div>
                 </div>
@@ -122,10 +202,9 @@
     <div id="game-setup-modal" class="modal" style="display: none;">
         <div class="modal-content coach-box">
             <h3 id="setup-game-title">Match Setup</h3>
-            <p>Choose your player and opponent mode:</p>
+            <p>Choose your opponent mode:</p>
             <div style="margin: 20px 0;">
-                <label style="display:block; margin-bottom:8px; font-weight:bold; color:var(--accent-cyan);">Select Mode:</label>
-                <select id="game-mode-select" class="btn" style="background:#0f172a; color:white; width:100%; text-align:left; padding:12px;">
+                <select id="game-mode-select" class="btn" style="background:var(--surface-color); color:var(--text-main); width:100%; text-align:left; padding:12px;">
                     <option value="1-ai">👤 vs 1 AI Opponent</option>
                     <option value="2-ai">🤖 vs 2 AI Opponents</option>
                     <option value="pass-play">👥 Local Pass & Play</option>
@@ -153,10 +232,21 @@
     <div id="toast-container"></div>
 
     <script src="audio.js"></script>
+    <script src="customization.js"></script>
+    <script src="pets.js"></script>
+    <script src="house.js"></script>
+    <script src="betting.js"></script>
+    <script src="wordlists.js"></script>
     <script src="tutorials.js"></script>
     <script src="games.js"></script>
     <script src="boardgames.js"></script>
-    <script src="betting.js"></script>
+    <script src="wordgames.js"></script>
+    <script src="moregames.js"></script>
+    <script src="moregames2.js"></script>
+    <script src="moregames3.js"></script>
+    <script src="moregames4.js"></script>
+    <script src="arcadegames.js"></script>
+    <script src="minesweeper.js"></script>
     <script src="casino.js"></script>
     <script src="script.js"></script>
 </body>

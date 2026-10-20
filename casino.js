@@ -63,7 +63,6 @@ function showCasinoEnd(gameId) {
 
 Object.assign(GameEngines, {
 
-    // ============ BACCARAT ============
     'baccarat': {
         bacValue(card) {
             if (card.rank === 'A') return 1;
@@ -79,10 +78,8 @@ Object.assign(GameEngines, {
                 <div id="bac-bet-area"></div>
                 <div id="bac-table" style="display:none; margin-top:20px;">
                     <div style="display:flex; gap:30px; justify-content:center; flex-wrap:wrap;">
-                        <div><h4>Player (<span id="bac-psum">0</span>)</h4>
-                            <div id="bac-player" style="display:flex; gap:8px; justify-content:center;"></div></div>
-                        <div><h4>Banker (<span id="bac-bsum">0</span>)</h4>
-                            <div id="bac-banker" style="display:flex; gap:8px; justify-content:center;"></div></div>
+                        <div><h4>Player (<span id="bac-psum">0</span>)</h4><div id="bac-player" style="display:flex; gap:8px; justify-content:center;"></div></div>
+                        <div><h4>Banker (<span id="bac-bsum">0</span>)</h4><div id="bac-banker" style="display:flex; gap:8px; justify-content:center;"></div></div>
                     </div>
                 </div>
                 <div id="bac-status" style="margin-top:15px; font-weight:bold;"></div>`;
@@ -94,10 +91,7 @@ Object.assign(GameEngines, {
             const area = document.getElementById('bac-bet-area');
             const row = document.createElement('div');
             row.style.cssText = 'display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:10px;';
-            row.innerHTML = `
-                <button class="btn primary-btn" onclick="GameEngines.baccarat.placeBet('player')">Bet Player (1:1)</button>
-                <button class="btn primary-btn" onclick="GameEngines.baccarat.placeBet('banker')">Bet Banker (1:1)</button>
-                <button class="btn primary-btn" onclick="GameEngines.baccarat.placeBet('tie')">Bet Tie (8:1)</button>`;
+            row.innerHTML = `<button class="btn primary-btn" onclick="GameEngines.baccarat.placeBet('player')">Bet Player (1:1)</button><button class="btn primary-btn" onclick="GameEngines.baccarat.placeBet('banker')">Bet Banker (1:1)</button><button class="btn primary-btn" onclick="GameEngines.baccarat.placeBet('tie')">Bet Tie (8:1)</button>`;
             area.querySelector('.bet-panel').appendChild(row);
         },
         placeBet(choice) {
@@ -107,8 +101,7 @@ Object.assign(GameEngines, {
             state.coins -= amount; saveGameData(); updateStatsUI();
             document.getElementById('bac-bet-area').style.display = 'none';
             const deck = createStandardDeck(false);
-            const player = [deck.pop(), deck.pop()];
-            const banker = [deck.pop(), deck.pop()];
+            const player = [deck.pop(), deck.pop()], banker = [deck.pop(), deck.pop()];
             const pNat = g.total(player) >= 8, bNat = g.total(banker) >= 8;
             if (!pNat && !bNat) {
                 let pd = false;
@@ -146,7 +139,6 @@ Object.assign(GameEngines, {
         }
     },
 
-    // ============ THREE CARD POKER ============
     'three-card-poker': {
         ante: 0, play: 0, playerHand: [], dealerHand: [], stage: 'bet',
         render(container, mode) {
@@ -188,9 +180,7 @@ Object.assign(GameEngines, {
             document.getElementById('tcp-game-area').style.display = 'block';
             document.getElementById('tcp-player').innerHTML = g.playerHand.map(c => renderCard(c.rank, c.suit)).join('');
             document.getElementById('tcp-dealer').innerHTML = g.dealerHand.map(() => cardBack()).join('');
-            document.getElementById('tcp-actions').innerHTML = `
-                <button class="btn primary-btn" onclick="AudioFX.playCardSnap(); GameEngines['three-card-poker'].resolve('play')">Play (match ante)</button>
-                <button class="btn tutorial-btn" onclick="AudioFX.playClick(); GameEngines['three-card-poker'].resolve('fold')">Fold (lose ante)</button>`;
+            document.getElementById('tcp-actions').innerHTML = `<button class="btn primary-btn" onclick="AudioFX.playCardSnap(); GameEngines['three-card-poker'].resolve('play')">Play (match ante)</button><button class="btn tutorial-btn" onclick="AudioFX.playClick(); GameEngines['three-card-poker'].resolve('fold')">Fold (lose ante)</button>`;
             setText('tcp-status', `Your hand: ${evaluateThreeCardHand(g.playerHand).name}.`);
         },
         resolve(choice) {
@@ -198,25 +188,16 @@ Object.assign(GameEngines, {
             if (g.stage !== 'play') return;
             g.stage = 'done';
             document.getElementById('tcp-dealer').innerHTML = g.dealerHand.map(c => renderCard(c.rank, c.suit)).join('');
-            const pEval = evaluateThreeCardHand(g.playerHand);
-            const dEval = evaluateThreeCardHand(g.dealerHand);
-            if (choice === 'fold') {
-                AudioFX.playClick();
-                setText('tcp-status', `Folded. Lost ${g.ante} coins.`, '#ef4444');
-                recordCasinoResult('three-card-poker', -g.ante);
-                return showCasinoEnd('three-card-poker');
-            }
+            const pEval = evaluateThreeCardHand(g.playerHand), dEval = evaluateThreeCardHand(g.dealerHand);
+            if (choice === 'fold') { AudioFX.playClick(); setText('tcp-status', `Folded. Lost ${g.ante} coins.`, '#ef4444'); recordCasinoResult('three-card-poker', -g.ante); return showCasinoEnd('three-card-poker'); }
             state.coins -= g.play;
             let bonus = 0;
             if (pEval.rank === 6) bonus = g.ante * 5;
             else if (pEval.rank === 5) bonus = g.ante * 4;
             else if (pEval.rank === 4) bonus = g.ante * 1;
             let ret = 0, msg = '', color = '#f59e0b';
-            if (!dealerQualifies(dEval)) {
-                ret = g.ante * 2 + g.play + bonus;
-                msg = `Dealer doesn't qualify. Ante wins, Play pushes.`;
-                color = '#22c55e';
-            } else {
+            if (!dealerQualifies(dEval)) { ret = g.ante * 2 + g.play + bonus; msg = `Dealer doesn't qualify. Ante wins, Play pushes.`; color = '#22c55e'; }
+            else {
                 const cmp = compareThreeCardHands(pEval, dEval);
                 if (cmp > 0) { ret = g.ante * 2 + g.play * 2 + bonus; msg = `You win! ${pEval.name} beats ${dEval.name}.`; color = '#22c55e'; }
                 else if (cmp < 0) { ret = bonus; msg = `Dealer wins with ${dEval.name}.`; color = '#ef4444'; }
@@ -232,17 +213,12 @@ Object.assign(GameEngines, {
         }
     },
 
-    // ============ ROULETTE ============
     'roulette': {
         spinning: false,
         render(container, mode) {
             const g = this;
             g.spinning = false;
-            const numsRow = (arr) => arr.map(n => {
-                const c = RED_NUMS.includes(n) ? '#dc2626' : '#0f172a';
-                return `<button class="roul-num" style="background:${c}; color:white; border:1px solid #334155; padding:6px; border-radius:4px; cursor:pointer; font-weight:bold; font-size:0.75rem;"
-                    onclick="GameEngines.roulette.spin(${n})">${n}</button>`;
-            }).join('');
+            const numsRow = (arr) => arr.map(n => { const c = RED_NUMS.includes(n) ? '#dc2626' : '#0f172a'; return `<button class="roul-num" style="background:${c}; color:white; border:1px solid #334155; padding:6px; border-radius:4px; cursor:pointer; font-weight:bold; font-size:0.75rem;" onclick="GameEngines.roulette.spin(${n})">${n}</button>`; }).join('');
             container.innerHTML = `
                 <h3>🎡 European Roulette — ${mode.toUpperCase()}</h3>
                 ${PLAY_MONEY_NOTE}
@@ -260,11 +236,8 @@ Object.assign(GameEngines, {
                     </div>
                     <p style="margin-bottom:6px; font-weight:bold;">Single numbers (35:1):</p>
                     <div style="max-width:340px; margin:0 auto;">
-                        <button style="background:#16a34a; color:white; border:1px solid #334155; padding:6px; border-radius:4px; cursor:pointer; font-weight:bold; width:100%; margin-bottom:4px;"
-                            onclick="GameEngines.roulette.spin(0)">0 — Green (35:1)</button>
-                        <div id="roul-grid" style="display:grid; grid-template-columns:repeat(3, 1fr); gap:4px;">
-                            ${numsRow([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36])}
-                        </div>
+                        <button style="background:#16a34a; color:white; border:1px solid #334155; padding:6px; border-radius:4px; cursor:pointer; font-weight:bold; width:100%; margin-bottom:4px;" onclick="GameEngines.roulette.spin(0)">0 — Green (35:1)</button>
+                        <div id="roul-grid" style="display:grid; grid-template-columns:repeat(3, 1fr); gap:4px;">${numsRow([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36])}</div>
                     </div>
                 </div>
                 <div id="roul-status" style="margin-top:15px; font-weight:bold;"></div>`;
@@ -318,7 +291,6 @@ Object.assign(GameEngines, {
         }
     },
 
-    // ============ CRAPS ============
     'craps': {
         point: 0, bet: 0, rolling: false, over: false, _coinsBefore: 0,
         render(container, mode) {
@@ -327,13 +299,9 @@ Object.assign(GameEngines, {
             container.innerHTML = `
                 <h3>🎲 Craps — ${mode.toUpperCase()}</h3>
                 ${PLAY_MONEY_NOTE}
-                <p><b>Come-out:</b> Win on 7 or 11 (1:1), lose on 2/3/12. Any other number sets the <b>point</b>.<br>
-                <b>Point phase:</b> Roll the point again to win — but 7 loses!</p>
+                <p><b>Come-out:</b> Win on 7 or 11 (1:1), lose on 2/3/12. Any other number sets the <b>point</b>.<br><b>Point phase:</b> Roll the point again to win — but 7 loses!</p>
                 <div id="craps-bet-area"></div>
-                <div id="craps-dice" style="display:flex; gap:20px; justify-content:center; margin:20px 0;">
-                    <div class="die" id="die1">?</div>
-                    <div class="die" id="die2">?</div>
-                </div>
+                <div id="craps-dice" style="display:flex; gap:20px; justify-content:center; margin:20px 0;"><div class="die" id="die1">?</div><div class="die" id="die2">?</div></div>
                 <div id="craps-point" style="font-size:1.2rem; min-height:30px; font-weight:bold;"></div>
                 <div id="craps-status" style="margin-top:15px; font-weight:bold; min-height:30px;"></div>`;
             g.setupUI();
@@ -351,16 +319,9 @@ Object.assign(GameEngines, {
         roll() {
             const g = this;
             if (g.rolling || g.over) return;
-            if (g.point === 0) {
-                const amt = getBetAmount('craps-bet-area');
-                if (amt < 1 || amt > state.coins) return;
-                g.bet = amt; g._coinsBefore = state.coins;
-                state.coins -= amt; saveGameData(); updateStatsUI();
-            }
-            g.rolling = true;
-            AudioFX.playCardSnap();
-            const d1 = Math.floor(Math.random() * 6) + 1;
-            const d2 = Math.floor(Math.random() * 6) + 1;
+            if (g.point === 0) { const amt = getBetAmount('craps-bet-area'); if (amt < 1 || amt > state.coins) return; g.bet = amt; g._coinsBefore = state.coins; state.coins -= amt; saveGameData(); updateStatsUI(); }
+            g.rolling = true; AudioFX.playCardSnap();
+            const d1 = Math.floor(Math.random() * 6) + 1, d2 = Math.floor(Math.random() * 6) + 1;
             const total = d1 + d2;
             document.getElementById('die1').textContent = d1;
             document.getElementById('die2').textContent = d2;
@@ -369,35 +330,13 @@ Object.assign(GameEngines, {
         resolve(total) {
             const g = this;
             if (g.point === 0) {
-                if (total === 7 || total === 11) {
-                    AudioFX.playWin();
-                    state.coins += g.bet * 2; saveGameData(); updateStatsUI();
-                    setText('craps-status', `🎉 Natural ${total}! +${g.bet} coins!`, '#22c55e');
-                    g.finishRound();
-                } else if (total === 2 || total === 3 || total === 12) {
-                    AudioFX.playClick();
-                    setText('craps-status', `💥 Craps! Rolled ${total}. Lost ${g.bet} coins.`, '#ef4444');
-                    g.finishRound();
-                } else {
-                    g.point = total;
-                    document.getElementById('craps-point').innerHTML = `Point: <b style="color:#38bdf8;">${total}</b> — roll again!`;
-                    setText('craps-status', `Keep rolling. Hit ${total} to win, avoid 7.`);
-                    g.rolling = false;
-                }
+                if (total === 7 || total === 11) { AudioFX.playWin(); state.coins += g.bet * 2; saveGameData(); updateStatsUI(); setText('craps-status', `🎉 Natural ${total}! +${g.bet} coins!`, '#22c55e'); g.finishRound(); }
+                else if (total === 2 || total === 3 || total === 12) { AudioFX.playClick(); setText('craps-status', `💥 Craps! Rolled ${total}. Lost ${g.bet} coins.`, '#ef4444'); g.finishRound(); }
+                else { g.point = total; document.getElementById('craps-point').innerHTML = `Point: <b style="color:#38bdf8;">${total}</b> — roll again!`; setText('craps-status', `Keep rolling. Hit ${total} to win, avoid 7.`); g.rolling = false; }
             } else {
-                if (total === g.point) {
-                    AudioFX.playWin();
-                    state.coins += g.bet * 2; saveGameData(); updateStatsUI();
-                    setText('craps-status', `🎉 Hit the point ${total}! +${g.bet} coins!`, '#22c55e');
-                    g.finishRound();
-                } else if (total === 7) {
-                    AudioFX.playClick();
-                    setText('craps-status', `💀 Seven out! Lost ${g.bet} coins.`, '#ef4444');
-                    g.finishRound();
-                } else {
-                    setText('craps-status', `Rolled ${total}. Point still ${g.point}.`);
-                    g.rolling = false;
-                }
+                if (total === g.point) { AudioFX.playWin(); state.coins += g.bet * 2; saveGameData(); updateStatsUI(); setText('craps-status', `🎉 Hit the point ${total}! +${g.bet} coins!`, '#22c55e'); g.finishRound(); }
+                else if (total === 7) { AudioFX.playClick(); setText('craps-status', `💀 Seven out! Lost ${g.bet} coins.`, '#ef4444'); g.finishRound(); }
+                else { setText('craps-status', `Rolled ${total}. Point still ${g.point}.`); g.rolling = false; }
             }
         },
         finishRound() {
@@ -409,15 +348,13 @@ Object.assign(GameEngines, {
         }
     },
 
-    // ============ PLINKO ============
     'plinko': {
-        canvas: null, ctx: null, balls: [], pegs: [], buckets: [],
-        animationId: null, betRef: null,
+        canvas: null, ctx: null, balls: [], pegs: [], buckets: [], betRef: null,
         MULTIPLIERS: [10, 3, 1.5, 0.5, 0.2, 0.5, 1.5, 3, 10],
         ROWS: 8, WIDTH: 500, HEIGHT: 460, PEG_R: 6, SPACING: 46, BUCKET_H: 40, BALL_R: 8,
         render(container, mode) {
             const g = this;
-            g.balls = []; g.animationId = null;
+            g.balls = [];
             g.pegs = [];
             for (let r = 0; r < g.ROWS; r++) {
                 const n = r + 3;
@@ -426,18 +363,13 @@ Object.assign(GameEngines, {
             }
             g.buckets = [];
             const bw = g.WIDTH / g.MULTIPLIERS.length;
-            for (let i = 0; i < g.MULTIPLIERS.length; i++) {
-                g.buckets.push({ x: i * bw, y: g.HEIGHT - g.BUCKET_H, width: bw, height: g.BUCKET_H, multiplier: g.MULTIPLIERS[i] });
-            }
+            for (let i = 0; i < g.MULTIPLIERS.length; i++) g.buckets.push({ x: i * bw, y: g.HEIGHT - g.BUCKET_H, width: bw, height: g.BUCKET_H, multiplier: g.MULTIPLIERS[i] });
             container.innerHTML = `
                 <h3>🎲 Plinko — ${mode.toUpperCase()}</h3>
                 ${PLAY_MONEY_NOTE}
-                <p>Drop a ball from the top. Every peg bounce is random! Land in a high-multiplier bucket for big payouts.</p>
+                <p>Drop a ball from the top. Land in a high-multiplier bucket for big payouts.</p>
                 <div id="plinko-bet-area"></div>
-                <div style="position:relative; display:inline-block; margin:20px 0;">
-                    <canvas id="plinko-canvas" width="${g.WIDTH}" height="${g.HEIGHT}"
-                        style="background:#0a0e1a; border-radius:12px; max-width:100%; display:block; margin:0 auto;"></canvas>
-                </div>
+                <div style="position:relative; display:inline-block; margin:20px 0;"><canvas id="plinko-canvas" width="${g.WIDTH}" height="${g.HEIGHT}" style="background:#0a0e1a; border-radius:12px; max-width:100%; display:block; margin:0 auto;"></canvas></div>
                 <div id="plinko-status" style="margin-top:15px; font-weight:bold;"></div>`;
             g.canvas = document.getElementById('plinko-canvas');
             g.ctx = g.canvas.getContext('2d');
@@ -462,18 +394,18 @@ Object.assign(GameEngines, {
                 saveGameData(); updateStatsUI();
                 if (typeof showToast === 'function') showToast(`🏆 Achievement: Plinko Pro! +${state.achievements.plinkoDrop.reward} Coins`, 'success', 4000);
             }
-            g.balls.push({ x: g.WIDTH / 2 + (Math.random() - 0.5) * 6, y: 20, vx: (Math.random() - 0.5) * 1.5, vy: 0, r: g.BALL_R, bet: bet, color: '#ffd700', active: true });
-            if (!g.animationId) g.startLoop();
+            g.balls.push({ x: g.WIDTH / 2 + (Math.random() - 0.5) * 6, y: 20, vx: (Math.random() - 0.5) * 1.5, vy: 0, r: g.BALL_R, bet, color: '#ffd700', active: true });
+            g.startLoop();
         },
         startLoop() {
             const g = this;
             const step = () => {
-                if (!document.getElementById('plinko-canvas')) { g.animationId = null; return; }
+                if (!document.getElementById('plinko-canvas')) return;
                 g.update(); g.draw();
-                if (g.balls.some(b => b.active)) g.animationId = requestAnimationFrame(step);
-                else { g.balls = []; g.animationId = null; }
+                if (g.balls.some(b => b.active)) requestAnimationFrame(step);
+                else g.balls = [];
             };
-            g.animationId = requestAnimationFrame(step);
+            requestAnimationFrame(step);
         },
         update() {
             const g = this;
@@ -505,7 +437,7 @@ Object.assign(GameEngines, {
                             const net = payout - ball.bet;
                             recordCasinoResult('plinko', net);
                             if (net > 0) AudioFX.playWin(); else AudioFX.playClick();
-                            setText('plinko-status', `${b.multiplier}x! You won ${payout} coins (bet ${ball.bet}). Net: ${net > 0 ? '+' : ''}${net}`, net > 0 ? '#22c55e' : '#f59e0b');
+                            setText('plinko-status', `${b.multiplier}x! Won ${payout} coins (bet ${ball.bet}). Net: ${net > 0 ? '+' : ''}${net}`, net > 0 ? '#22c55e' : '#f59e0b');
                             showCasinoEnd('plinko');
                             break;
                         }
@@ -518,23 +450,9 @@ Object.assign(GameEngines, {
             const g = this, ctx = g.ctx;
             if (!ctx) return;
             ctx.clearRect(0, 0, g.WIDTH, g.HEIGHT);
-            for (const peg of g.pegs) {
-                ctx.beginPath(); ctx.arc(peg.x, peg.y, peg.r, 0, Math.PI * 2);
-                ctx.fillStyle = '#38bdf8'; ctx.fill();
-                ctx.strokeStyle = '#1e293b'; ctx.lineWidth = 2; ctx.stroke();
-            }
-            for (const b of g.buckets) {
-                const color = b.multiplier >= 5 ? '#dc2626' : b.multiplier >= 2 ? '#f59e0b' : b.multiplier >= 1 ? '#eab308' : '#22c55e';
-                ctx.fillStyle = color; ctx.fillRect(b.x + 2, b.y, b.width - 4, b.height);
-                ctx.fillStyle = '#fff'; ctx.font = 'bold 14px sans-serif';
-                ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-                ctx.fillText(b.multiplier + 'x', b.x + b.width / 2, b.y + b.height / 2);
-            }
-            for (const ball of g.balls) {
-                ctx.beginPath(); ctx.arc(ball.x, ball.y, ball.r, 0, Math.PI * 2);
-                ctx.fillStyle = ball.color; ctx.fill();
-                ctx.strokeStyle = '#fff'; ctx.lineWidth = 2; ctx.stroke();
-            }
+            for (const peg of g.pegs) { ctx.beginPath(); ctx.arc(peg.x, peg.y, peg.r, 0, Math.PI * 2); ctx.fillStyle = '#38bdf8'; ctx.fill(); ctx.strokeStyle = '#1e293b'; ctx.lineWidth = 2; ctx.stroke(); }
+            for (const b of g.buckets) { const color = b.multiplier >= 5 ? '#dc2626' : b.multiplier >= 2 ? '#f59e0b' : b.multiplier >= 1 ? '#eab308' : '#22c55e'; ctx.fillStyle = color; ctx.fillRect(b.x + 2, b.y, b.width - 4, b.height); ctx.fillStyle = '#fff'; ctx.font = 'bold 14px sans-serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(b.multiplier + 'x', b.x + b.width / 2, b.y + b.height / 2); }
+            for (const ball of g.balls) { ctx.beginPath(); ctx.arc(ball.x, ball.y, ball.r, 0, Math.PI * 2); ctx.fillStyle = ball.color; ctx.fill(); ctx.strokeStyle = '#fff'; ctx.lineWidth = 2; ctx.stroke(); }
         }
     }
 });
